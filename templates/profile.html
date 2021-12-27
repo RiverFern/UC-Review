@@ -1,0 +1,130 @@
+[[extend 'layout.html']]
+
+<style>
+[v-cloak] {
+     display: none;
+}
+</style>
+
+<div class="section" id="vue-target" v-cloak>
+    <div class="columns">
+        <div class="column is-three-fifths">
+            [[if reviews is None:]]
+            <h1 class="title">Add Review</h1>
+            <button class="button is-warning" @click="set_add_status(true)" v-if="add_mode == false">
+                <i class="fa fa-plus fa-fw"></i>
+            </button>
+            <div v-if="add_mode == true">
+                <div class="block">
+                    <textarea class="textarea" placeholder="Type your positive review here"></textarea>
+                </div>
+                <div class="block">
+                    <textarea class="textarea" placeholder="Type your negative review here" ></textarea>
+                </div>
+            </div>
+            [[pass]]
+        </div>
+        <div class="column">
+            [[if stats is not None:]]
+                <div class="block" v-for="stat in stats">
+                        <h1 class="title">Your Stats:</h1>
+                        <h1 class="subtitle">School:
+                            <div v-if= "edit_mode == true">
+                            <div class="control">
+                                    <select v-model="stat['school']">
+                                        <option disabled value="">Please select your school</option>
+                                        <option>UC Santa Cruz</option>
+                                        <option>UC Los Angeles</option>
+                                        <option>UC Irvine</option>
+                                        <option>UC San Diego</option>
+                                        <option>UC Berkeley</option>
+                                        <option>UC Santa Barbara</option>
+                                        <option>UC Riverside</option>
+                                        <option>UC Merced</option>
+                                        <option>UC Davis</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div v-else>{{ stat.school }}</div>
+
+                        </h1>
+
+                        <h1 class="subtitle">Grad Year:
+                            <div class="control">
+                                <div v-if="edit_mode == true">
+                                    <input type="text" class="input" v-model="stat['grad_year']"/>
+                                </div>
+                                <div v-else>{{ stat.grad_year }}</div>
+                            </div>
+                        </h1>
+
+                        <h1 class="subtitle">Major:
+                            <div class="control">
+                                <div v-if="edit_mode == true">
+                                    <input type="text" class="input" v-model="stat['major']"/>
+                                </div>
+                                <div v-else>{{ stat.major }}</div>
+                            </div>
+                        </h1>
+
+                        <h1 class="subtitle">SAT Score:
+                            <div class="control">
+                                <div v-if="edit_mode == true">
+                                    <input type="text" class="input" v-model="stat['sat_score']"/>
+                                </div>
+                                <div v-else>{{ stat.sat_score }}</div>
+                            </div>
+                        </h1>
+
+                        <h1 class="subtitle">ACT Score:
+                            <div class="control">
+                                <div v-if="edit_mode == true">
+                                    <input type="text" class="input" v-model="stat['act_score']"/>
+                                </div>
+                                <div v-else>{{ stat.act_score }}</div>
+                            </div>
+                        </h1>
+
+                        <h1 class="subtitle">Gpa:
+                            <div class="control">
+                                <div v-if="edit_mode == true">
+                                    <input type="text" class="input" v-model="stat['gpa']"/>
+                                </div>
+                                <div v-else>{{ stat.gpa }}</div>
+                            </div>
+                        </h1>
+
+                        <div v-if="edit_mode == true" >
+                            <button class="button is-primary" @click="stop_edit()">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="block" v-if="edit_mode == false">
+                        <button class="button is-warning" @click="set_edit_status(true)">
+                            Edit Stats
+                        </button>
+                    </div>
+
+            [[else:]]
+                <div class="block">
+                    <a class="button is-warning" href="[[=URL('add_stats') ]]">
+                        Add Stats
+                    </a>
+                </div>
+            [[pass]]
+                <div class="block">
+                    Del Post **Del Account**
+                </div>
+        </div>
+    </div>
+</div>
+
+[[block page_scripts]]
+<script>
+let load_stats_url = "[[=XML(load_stats_url)]]";
+let edit_stats_url = "[[=XML(edit_stats_url)]]";
+</script>
+<script src="js/profile.js"></script>
+[[end]]

@@ -1,0 +1,83 @@
+timestamp: 2021-05-27T15:47:08.865993
+CREATE TABLE "py4web_session"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "rkey" CHAR(512),
+    "rvalue" TEXT,
+    "expiration" INTEGER,
+    "created_on" TIMESTAMP,
+    "expires_on" TIMESTAMP
+);
+success!
+timestamp: 2021-05-27T15:47:08.890149
+CREATE TABLE "auth_user"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "email" CHAR(512) UNIQUE,
+    "password" CHAR(512),
+    "first_name" CHAR(512),
+    "last_name" CHAR(512),
+    "sso_id" CHAR(512),
+    "action_token" CHAR(512),
+    "last_password_change" TIMESTAMP,
+    "past_passwords_hash" TEXT
+);
+success!
+timestamp: 2021-05-27T15:47:08.898655
+CREATE TABLE "auth_user_tag_groups"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "path" CHAR(512),
+    "record_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2021-05-28T09:04:51.477439
+CREATE TABLE "reviews"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_email" CHAR(512),
+    "rating_weight" CHAR(512),
+    "positive_experience" CHAR(512),
+    "negative_experience" CHAR(512)
+);
+success!
+timestamp: 2021-05-28T09:04:51.545003
+CREATE TABLE "schools"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "school_name" CHAR(512) NOT NULL,
+    "school_address" CHAR(512) NOT NULL,
+    "school_email" CHAR(512) NOT NULL
+);
+success!
+timestamp: 2021-06-02T00:24:41.324120
+CREATE TABLE "test"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user" CHAR(512)
+);
+success!
+timestamp: 2021-06-02T00:26:04.838800
+CREATE TABLE "user_tats"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "stats" CHAR(512)
+);
+success!
+timestamp: 2021-06-02T00:26:44.531303
+ALTER TABLE "user_stats" ADD "stats" CHAR(512);
+timestamp: 2021-06-02T00:27:11.173352
+ALTER TABLE "user_stats" ADD "stats" CHAR(512);
+timestamp: 2021-06-02T00:28:47.081950
+CREATE TABLE "stats"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "school" CHAR(512),
+    "grad_year" INTEGER,
+    "major" CHAR(512),
+    "sat_score" INTEGER,
+    "act_score" INTEGER,
+    "gpa" DOUBLE,
+    "student" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2021-06-02T19:56:10.256871
+ALTER TABLE "reviews" ADD "positive_review" CHAR(512);
+timestamp: 2021-06-02T19:56:10.264162
+ALTER TABLE "reviews" ADD "negative_review" CHAR(512);
+timestamp: 2021-06-02T19:56:10.269151
+ALTER TABLE "reviews" ADD "student" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ;
+success!
+success!

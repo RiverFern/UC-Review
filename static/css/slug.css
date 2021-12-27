@@ -1,0 +1,26 @@
+.navbar {
+    background-color: #003c6c;
+}
+
+.navbar-brand a {
+    color: #fdc700;
+    font-size: 48px;
+    font-family: 'Arial', 'sans-serif';
+}
+
+.navbar-brand a:hover {
+    color: #c59a00;
+    size: 48px;
+}
+
+.full-width {
+    width: 100%;
+    height: auto;
+}
+
+#landing-1 {
+}
+
+#landing-1 .title {
+    color: white;
+}
